@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>התחברות</title>
+    <link rel="stylesheet" href="style.css">
+
+   
+</head>
+
+<body>
+    <div class="login-container">
+   
+    <img src="../icon/logo_new_trns.png" alt="לוגו" width="150px"></a>
+    <div class="log-page">
+        
+        <h2>התחברות</h2>
+    
+
+        <label>אימייל</label>
+        <input type="email" id="email">
+
+        <label>סיסמא</label>
+        <input type="password" id="ps">
+
+        <button id="btn">הכנס</button>
+
+        <div class="log-box">
+            אם אתה לא רשום במערכת אתה יכול להירשם:
+            <br>
+            <button class="register-btn" onclick="goRegister()">עבור לדף הרשמה</button>
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        // התחברות
+        document.querySelector("#btn").addEventListener("click",  async () => {// asny קוד אסינכרוני פונקציה סינכרונית יכולה לבמע פעולות שלוקחות זמן כמו קריאה לשרת מבלי לעצור את הדפדפן
+        
+            const email = document.querySelector("#email").value.trim();
+            const password = document.querySelector("#ps").value.trim();
+        
+            //      בדיקות תקינות
+            
+            // אימייל תקין – חייב לכלול טקסט לפני @ ואחריו
+            const emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        
+            // סיסמה – לפחות 7 תווים, גם אותיות וגם מספרים
+            const psOK = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/.test(password);
+        
+            if (!emailOK) {
+                alert("האימייל אינו תקין. נא להקליד אימייל חוקי  .");
+                return;
+            }
+        
+            if (!psOK) {
+                alert("הסיסמה חייבת להיות לפחות 7 תווים, ולכלול אותיות באנגלית ומספרים.");
+                return;
+            }
+            const response= await fetch('http://127.0.0.1:5000/api/user/login',{ //כל מקום שכתוב אוואיט אנ מחכה לתוצאה של פעולה סינכורנית אל תמשיך לרוץ עד שהשרת עונה תשובה
+                method: 'POST',
+                headers: {                                  //שורות של יצירת בקשה ושליחתה
+                      'Content-Type': 'application/json'
+                 },
+                 body:JSON.stringify({
+                    "email": email,"password": password
+                 })
+
+            });
+            console.log(response)
+            // ...
+            const result=  await response.json(); //ממירים את התשובה שקיימת ברספונס לתשובה מסוג גייסון\
+            console.log(result);
+
+            
+            //   בדיקה אם הסטטוס מהשרת הוא 'sucsses'
+            if (result.status && result.status.toLowerCase().includes("suc")) {
+
+                alert("התחברת בהצלחה!");
+                
+                //    הפניה לדף הבית
+                window.location.href = "home.html"; 
+            } else {
+                // הצגת הודעת השגיאה שחזרה מהשרת
+                alert(result.message);
+            }
+        
+            // איפוס השדות רק לאחר טיפול בתשובה
+            document.querySelector("#email").value = "";
+            document.querySelector("#ps").value = "";
+        });
+        
+        
+        // מעבר לדף הרשמה
+        function goRegister() {
+            window.location.href = "register.html";
+        }
+        
+        </script>
+        
+
+</body>
+</html>

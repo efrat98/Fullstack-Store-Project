@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>טופס הרשמה</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <link rel="stylesheet" href="register.css">
+</head>
+<body class="register-page">
+
+  <div class="form-box">
+    <img src="../icon/logo_new_trns.png" alt="לוגו" width="150px"></a>
+
+    <h2>טופס הרשמה</h2>
+
+    <label for="email">אימייל:</label>
+    <input type="email" id="email">
+
+    <label for="phone"> פלאפון:</label>
+    <input type="text" id="phone">
+
+    <label for="name">שם:</label>
+    <input type="text" id="name">
+
+    <label for="ps">סיסמה:</label>
+    <input type="password" id="ps">
+
+    <button id="btn">הרשם</button>
+  </div>
+
+<script>
+/* אתחול משתני משתמשים מתוך localStorage (או מערך ריק) */
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+/* אירוע לחיצה על כפתור "הרשם" */
+document.querySelector("#btn").addEventListener("click", async () => {
+
+  const email = document.querySelector("#email").value.trim();
+  const phone = document.querySelector("#phone").value.trim();
+  const fullName = document.querySelector("#name").value.trim();
+  const password = document.querySelector("#ps").value.trim();
+
+  // בדיקות תקינות
+  const emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const phoneOK = /^[0-9]{10}$/.test(phone);
+  const nameOK = /^[A-Za-zא-ת\s]+$/.test(fullName);
+  const psOK = /^(?=.*[A-Za-z])(?=.*\d).{7,}$/.test(password);
+
+  if (!emailOK) { alert("האימייל אינו תקין."); return; }
+  if (!phoneOK) { alert("מספר הפלאפון חייב להיות 10 ספרות."); return; }
+  if (!nameOK)  { alert("השם חייב להיות אותיות בלבד."); return; }
+  if (!psOK)    { alert("הסיסמה חייבת להכיל לפחות 7 תווים, כולל מספרים ואותיות."); return; }
+
+  
+
+
+  try {
+    const response = await fetch('http://127.0.0.1:5000/api/user/register', {
+      method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ email, password, phone, name: fullName })
+   });
+
+
+    if (!response.ok) {
+      // אפשר לקרוא טקסט/JSON משגיאה אם השרת מחזיר
+      const errText = await response.text();
+      console.error('Server error:', response.status, errText);
+      alert('שגיאה ברישום — נסי שוב מאוחר יותר.');
+      return;
+    }
+
+    const result = await response.json();
+    console.log('server result:', result);
+    alert("נרשמת בהצלחה!");
+  window.location.href = "home.html";// קשור לדף החנות אחרי שנרשם בהצלחה
+
+
+  } catch (err) {
+    console.error('Network/Fetch error:', err);
+    alert('לא ניתן להתחבר לשרת הרישום. בדקי שהוא רץ או נסי שוב מאוחר יותר.');
+    return;
+  }
+
+  const safeUser = { email, phone, name: fullName };
+  users.push(safeUser);
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // ניקוי שדות
+  document.querySelector("#email").value = "";
+  document.querySelector("#phone").value = "";
+  document.querySelector("#name").value = "";
+  document.querySelector("#ps").value = "";
+});
+</script>
+
+</body>
+</html>

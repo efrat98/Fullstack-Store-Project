@@ -1,0 +1,284 @@
+header {
+    height: 15%;
+    background-color: #ffffff;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+header a {
+    margin-left: 5%;   
+
+}
+
+#search {
+    margin-left: 50%;
+    cursor: pointer;
+
+}
+#bug{
+    cursor: pointer;
+
+}
+#category {
+    visibility: hidden;
+}
+
+
+
+
+.container {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+
+}
+select{
+    font-style: Arial, sans-serif;
+    color: #00aced ;
+    font-size: 16px;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* הקונטיינר של המוצרים בעמוד הבית */
+.container {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background: #4a76ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #2e5cff;
+}
+
+
+label {
+    font-weight: bold;
+    float: right;
+}
+
+.register-box {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+.register-btn {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background: #00a86b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    background: #008f5c;
+}
+
+/* רקע אפור בהיר */
+body.register-page {
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* קופסה עגולה רכה */
+.form-box {
+    width: 350px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* כותרת */
+.form-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* שדות */
+.form-box label {
+    display: block;
+    float: none; /* ביטול float */
+    text-align: right;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-radius: 12px;
+    font-size: 15px;
+}
+
+/* כפתור ירוק בהיר */
+.form-box button {
+    width: 100%;
+    padding: 12px;
+    background: #6fdc7a;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-box button:hover {
+    background: #57c063;
+}
+
+
+/* 2. המיכל העוטף: מרכוז אנכי ואופקי של כל דף ההתחברות */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ממקם אופקית (מרכוז) */
+    justify-content: center; /* ממקם אנכית (מרכוז) */
+    min-height: 100vh; /* מבטיח שהמיכל ימלא את כל גובה המסך */
+    padding: 20px;
+    width: 100%;
+}
+
+/* 3. מיכל הטופס הראשי (הקופסה הלבנה) */
+.log-page {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* צל עדין */
+    width: 100%;
+    max-width: 400px; /* הגבלת רוחב הטופס */
+    display: flex;
+    flex-direction: column; /* סידור אנכי של האלמנטים */
+    gap: 15px; /* רווח בין האלמנטים האנכיים */
+    text-align: right;
+}
+
+/* 4. עיצוב אלמנטים פנימיים */
+
+/* כותרת הטופס */
+.log-page h2 {
+    color: #333;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* התוויות */
+.log-page label {
+    display: block; /* גורם לתווית לתפוס שורה שלמה */
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+/* שדות הקלט (האימייל והסיסמה) */
+.log-page input[type="email"],
+.log-page input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* מבטיח שה-padding לא יגדיל את רוחב השדה מעבר ל-100% */
+    transition: border-color 0.3s;
+    text-align: right;
+}
+
+.log-page input:focus {
+    border-color: #007bff; /* הדגשה בכחול בפוקוס */
+    outline: none;
+}
+
+/* כפתור הכניסה הראשי */
+#btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+#btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* 5. תיבת ההרשמה */
+
+.log-box {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+/* כפתור ההרשמה */
+.register-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background-color: #1e7e34;
+}
